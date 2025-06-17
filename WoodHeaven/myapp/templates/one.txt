@@ -1,0 +1,94 @@
+---ORM------
+it is used to write row sql queries in django
+
+--- create ---------------------------------------------------------------------------
+
+--method-1---
+    car = Car()
+    car.save()
+    car = Car(car_name = 'Nexon',speed = 110)
+    car.save()
+
+--method 2-----
+    Car.objects.create(car_name = "xyz",speed = 80)
+
+--method-3-----------
+
+    car_dict = {'car_name':'alto','speed':160}
+    car_dict
+
+    Car.objects.create(**car_dict)
+
+-------------read------------------------
+cars = Car.objects.all()
+cars
+
+car = Car.objects.get(id = 1) # if we use get method for finding data of that particular id if id not found then return error
+                                # if we use filter then they return empty list if id is not found
+car
+
+
+
+---------------update------------------
+
+car = Car.objects.get(id=1)
+car.car_name = "Creta"
+car.speed = 160
+car.save()
+
+
+Car.objects.filter(id = 1).update(car_name = 'Creta Dark Edition')
+car.objects.all()
+
+
+-------------------Delete------------------
+
+Car.objects.get(id = 1).delete()
+
+Car.objects.all().delete()
+
+
+----Or method------
+
+
+std = Student.objects.filter(name__startswith = 'k') | student.objects.filter(name__endswith = 'r')
+
+
+-----------Bulk Create------------
+
+Student.objects.bulk_create([Student(name = 'a',age = 21) Student(name = 'dd', age = 21)])
+
+--------Find Exact Data---------
+
+Student.objects.get(name__exact = 'karan')
+
+---------get_or_create----------------
+obj,_ = People.objects.get_or_create(age = 1, name = 'ddd', about = 'cc',email = '@ddd')
+obj
+_   # return true
+-   # return false # because data is already created
+
+-----------------limitation--------------------
+obj.people.objects.all()
+obj = People.objects.all()[0:5]
+
+
+-------------start and end with-----------
+
+people.objects.filter(name__startswith = 'darshan')[0].name
+people.objects.filter(name__endswith = 'darshan')[0].name
+
+
+
+-----gte----lte-----------------------
+
+People.objects.filter(age__gte = 21).count()
+People.objects.filter(age__lte = 21).count()
+
+
+--------------first and last------------
+
+People.objects.first()
+People.objects.last()
+
+
